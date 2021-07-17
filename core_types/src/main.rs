@@ -13,7 +13,7 @@ fn main() {
     let coords_arr: [f32; 2] = [coords.0, coords.1];
     print_array(coords_arr);
 
-    let series = [1, 1, 2, 3, 5, 8, 13];
+    let series: [i32; 7] = [1, 1, 2, 3, 5, 8, 13];
     let last_series = series.len() - 1;
     ding(series[last_series]);
 
