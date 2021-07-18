@@ -39,5 +39,6 @@ A smart pointer is just a wrapper around a raw pointer adding additional capabil
 [std modules](https://doc.rust-lang.org/std/#modules)
 
 
-![Go to source](https://github.com/saidvandeklundert/LearningRust/blob/main/img/view_source_1.png)
-![Go to source](https://github.com/saidvandeklundert/LearningRust/blob/main/img/view_source_2.png)
+![Go to source](https://github.com/saidvandeklundert/LearningRust/blob/master/img/view_source_1.png)
+![Go to source](https://github.com/saidvandeklundert/LearningRust/blob/master/img/view_source_2.png)
+
