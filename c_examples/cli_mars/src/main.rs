@@ -1,12 +1,19 @@
 use std::io;
 
 fn main() {
+    println!("Enter your weight in kg:");
     // input 'own' the String created by String::new().
     // When input goes out of scope, the value is deallocated.
     let mut input = String::new();
-    io::stdin().read_line(&mut input);
+    io::stdin().read_line(&mut input).unwrap();
     println!("Input: {}", input);
-    let mars_weight = calculate_weight_on_mars(92.0);
+
+    // convert string to f32 after removing whitespace:
+    //      unwrap handles the fact that parse returns a result
+    let weight: f32 = input.trim().parse().unwrap();
+    dbg!(weight);
+
+    let mars_weight = calculate_weight_on_mars(weight);
     println!("Weight on Mars: {}kg", mars_weight);
 }
 

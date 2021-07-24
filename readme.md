@@ -39,13 +39,28 @@ At any given time inside a scope, we can have :
 - one mutable borrow, OR
 - many immutable borrows
 
-This restrictions imposed by the borrow checker prevents data races at compile time.
+This restrictions imposed by the borrow checker prevents data races at compile time. No performance price is paid during run time.
 
 
+### Gdb tips
+
+```
+cd xxx/target
+gdb cli_mars.exe
+b calculate_weight_on_mars      ! set breakpoint
+r                               ! run
+info locals
+info args
+```
 
 
+### Install
 
-
+Centos:
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+yum -y install gcc
+```
 
 
 
