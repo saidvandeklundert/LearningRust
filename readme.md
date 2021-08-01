@@ -1,3 +1,67 @@
+### Things about Rust
+
+Rust is a general-purpose language.
+
+Has the ability to prevent invalid data access at compile time. This eliminates a category of bugs and makes the programs written in Rust memory safe. Since it is the compiler handling it, there is no runtime cost.
+
+Rust aims:
+- safety: reason for the creed 'fearless concurrency'. Rust aims to provent the following:
+  - dangling pointers
+  - data races
+  - buffer overlow (access 4th element of 2 element array)
+  - iterator invalidation (issue caused by iterating over something changed halfway)
+- productivity: ergonomic features in the language and cargo.
+- control
+
+
+Big Rust features:
+- performance: no garbage collector or runtime environment. A 'big' language instead with a compiler that does a lot of checking.
+- concurrency
+- memory efficienct
+
+
+Downsides to Rust:
+- cyclic data structures (like linked lists) are very hard
+- compile time is slow
+- strictness, to the point where it can be annoying
+- huuuuuuuuuge language
+
+### Rust terms and terminology
+
+Borrow:
+
+Move:
+
+Trait: collection of methods implemented on a type.
+
+Unit: an empty tuple, written like so: `()`.
+
+Zero cost abstractions: features that Rust offer do not impose a runtime cost.
+
+Crate: a Rust package.
+
+No Rust 2.0: The promise is that there will never be a Rust 2.0 as Rust will also be backwards compatible.
+
+Rust prelude: the things that Rust imports for you automatically. Described [here](https://doc.rust-lang.org/std/prelude/index.html).
+
+Predicate: a condition, for instance in a for loop. Something that an expression evaluates to, like `true` or `false`.
+
+Reference: a value that stands in place for another value or a pointer to another value. There is a reference operator (`&`) and a dereference operator (`*`). The reference operator refers to the value. The dereference operator allows you to work with the value that the reference is pointing to.
+
+Lifetime annotations: used to declare the intent and signal the lifetime of a value. Most lifetime checks are unaided and the compiler takes care of them automatically as they are infered from the source code.
+
+The `'static` lifetime: hard-coded read-only section of an executable program that is read-only during execution. The `&str` is short for `&'static str`.
+
+Generic types: 
+
+### Statement vs expression
+
+A statement is not an expression. In Rust, statements appear in three places:
+- binding a name to a value using `=`
+- expressions delimited by `;`
+- type declarations, which includes data types created with the `struct` and `enum` keywords as well functions (defined using `fn`)
+
+
 ### Ownership rules
 
 1. Each value in Rust is owned by a variable.
@@ -63,8 +127,29 @@ yum -y install gcc
 ```
 
 
+### Cargo & tools
+
+Build system and package manager.
+
+```
+cd %TMP%
+cargo new                       // create new rust project
+cargo rustc --release           // build for real
+cargo run --release             // run release build
+cargo run -q --release          // run release build extra quiet
+cargo run -v                    // cargo run but with additional info
+cargo add num                   // let cargo add the num crate to the project
+
+cargo install cargo-edit        // add usefull cargo tool
+cargo add nums                  // using cargo-edit, update the toml in the package to include nums
+cargo doc                       // generate the doc for a crate locally
+cargo doc --open                // generate and open the documentation in the browser
+```
+
+Rustup manages your Rust installation(s).
 
 
+---
 
 [book](https://doc.rust-lang.org/book/)
 [std modules](https://doc.rust-lang.org/std/#modules)

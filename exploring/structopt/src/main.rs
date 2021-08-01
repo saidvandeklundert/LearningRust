@@ -2,6 +2,8 @@ use structopt::StructOpt;
 use strum::VariantNames;
 use strum_macros::{EnumString, EnumVariantNames};
 
+// cargo run -- -n ppr01
+
 #[derive(Debug, StructOpt)]
 #[structopt(name = "structopt example", about = "using structop")]
 struct Args {

@@ -1,3 +1,5 @@
+#![allow(unused_variables, dead_code)]
+
 fn main() {
     /*
     Types:
@@ -14,25 +16,32 @@ fn main() {
     //Scalar types
     let ch: char = 'z';
     let b: bool = true;
-    let e: i32 = -2323;
+    let e: i32 = -2_323; // underscore is ignore, used to improve readability
     let float: f32 = 3.4;
-    assert_eq!(ch, 'z');
-    assert_eq!(b, true);
-    assert_eq!(e, -2323);
-    assert_eq!(float, 3.4);
+    println!(
+        "char: {:?}\nbool: {:?}\ni32: {:?}\nfloat32: {:?}\n",
+        ch, b, e, float
+    );
+    // integers can be 'annotated':
+    let c = 30i32;
+    let d = 30_i32; // the _ is ignored by the compiler, it does improve readability
+    assert_eq!(c, d);
+    println!("annotated i32: {:?}\nanother annotated i32: {:?}\n", c, d);
     /*
         sequences:
-        - Tuple - homogeneous
-        - Array - heterogeneous
-        - Slice - pointer to an array
+        - Tuple - heterogeneous, can hold different types
+        - Array - homogeneous, can hold 1 type only and cannot change size.
+        - Slice - view into a block of memory represented as a pointer and a length
     */
     // Tuple:
     let tuple: (f32, f32) = (6.35, 15.123);
-    assert_eq!(tuple.0, 6.35);
-    assert_eq!(tuple.1, 15.123);
+    println!(
+        "tuple: {:?}\ntuple, element 0: {:?}\ntuple, element 1: {:?}",
+        tuple, tuple.0, tuple.1
+    );
     // Array:
     let arr: [u8; 2] = [12, 233];
-    assert_eq!(arr[1], 233);
+    println!("array: {:?}\narray, element 1: {:?}", arr, arr[1]);
     //Slice:
     let s = String::from("hello world");
     let hello = &s[0..5];
@@ -92,6 +101,11 @@ fn main() {
     marie.introduce_self();
 
     // Enum:
+    /*
+    An enum is always one and only one of those variants. If a struct wanted the same behavior, it would have to carefully enforce it and keep its fields private.
+
+    Structs are equivalent to an "AND" combination of the individual fields, while enums are an "OR" combinator.
+    */
     enum Color {
         Red,
         Green,
@@ -145,7 +159,8 @@ fn main() {
 
     /*
     Collections: https://doc.rust-lang.org/std/collections/index.html
-    - Vector: can re-size, stores only 1 type of data
+    - Vector: A contiguous growable array type with heap-allocated contents.
+        They can re-size, stores only 1 type of data
     */
     let mut a = vec![1, 2, 3]; // [1;10]
     a.push(4);
@@ -164,6 +179,10 @@ fn main() {
         Some(x) => println!("a[6] = {}", x),
         None => println!("error, no such element"),
     }
+    // when declaring a vec! without values, you need to specify the type:
+    let mut cities: Vec<&str> = Vec::new();
+    cities.push("Breda");
+    cities.push("Rotterdam");
 
     /*
     Strings, strings, strings and strings.
@@ -181,7 +200,7 @@ fn main() {
     ---
 
     &str:
-    - inflexiable
+    - inflexible
     - allocated on the stack
     - sequence of UTF-8 characters
     - you index into the bytes, not the char
@@ -218,4 +237,69 @@ fn main() {
     let example_string: String = String::from("world.");
     let formatted = format!("Hello {}", example_string);
     println!("{}", formatted);
+
+    /*
+    Usefull snippets:
+    */
+
+    // Returning Error or OK in Result Enum:
+    #[derive(PartialEq, Debug)]
+    struct PositiveNonzeroInteger(u64);
+    #[derive(PartialEq, Debug)]
+    enum CreationError {
+        Negative,
+        Zero,
+    }
+    impl PositiveNonzeroInteger {
+        fn new(value: i64) -> Result<PositiveNonzeroInteger, CreationError> {
+            if value < 0 {
+                return Err(CreationError::Negative);
+            } else if value == 0 {
+                return Err(CreationError::Zero);
+            } else {
+                return Ok(PositiveNonzeroInteger(value as u64));
+            }
+        }
+    }
+    assert!(PositiveNonzeroInteger::new(10).is_ok());
+    assert_eq!(
+        Err(CreationError::Negative),
+        PositiveNonzeroInteger::new(-10)
+    );
+    assert_eq!(Err(CreationError::Zero), PositiveNonzeroInteger::new(0));
+
+    // Dealing with type conversion:
+    let tc_a: i32 = 12;
+    let tc_b: f32 = 6.5;
+    let tc_res: i32 = tc_a + tc_b as i32;
+    println!("{}", tc_res);
+
+    // Wrapping generics:
+    #[derive(Debug, Copy, Clone)]
+    struct Wrapper<T> {
+        value: T,
+    }
+    impl<T> Wrapper<T> {
+        pub fn new(value: T) -> Self {
+            Wrapper { value }
+        }
+    }
+    let w1 = Wrapper::new("Foo");
+    let w2 = Wrapper::new(12);
+    dbg!(w1);
+    dbg!(w2);
+    //
+    let five = 0b101;
+    dbg!(five);
+    let thirty_one = 0x1F;
+    dbg!(thirty_one);
+    let two_hundred = 0o310;
+    dbg!(two_hundred);
+
+    /*
+    Enhance types:
+    #[derive(Debug)]
+    #[derive(Debug,PartialEq)]
+
+    */
 }

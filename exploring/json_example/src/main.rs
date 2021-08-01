@@ -6,6 +6,7 @@ fn main() {
     o_json = '["foo", {"bar" : ["baz", null, 1.0,2]}]';
     o = json.loads(o_json)
     print(o)
+
     */
     let o_json = r#"["foo", {"bar" : ["baz", null, 1.0,2]}]"#;
     let o: serde_json::Value = serde_json::from_str(&o_json).unwrap();
@@ -24,15 +25,15 @@ fn main() {
     println!("{}", &s);
 
     // Next section, JSON with a struct:
-    let bob = Person {
-        name: "Bob".to_string(),
-        age: 12,
+    let marie = Person {
+        name: "Marie".to_string(),
+        age: 4,
         verified: true,
         job: None,
         parents: ["Alice".to_string(), "Carl".to_string()].to_vec(),
     };
     // Serialize to JSON:
-    let json = serde_json::to_string(&bob).unwrap();
+    let json = serde_json::to_string(&marie).unwrap();
     println!("{}", &json);
     // deserialize again:
     let person: Person = serde_json::from_str(&json).unwrap();
