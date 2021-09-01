@@ -4,8 +4,6 @@ fn main() {
     /*
     Types:
     https://doc.rust-lang.org/reference/types.html
-
-    The built-in types:
     Scalar types:
       - booleans
       - characters
@@ -24,8 +22,7 @@ fn main() {
     );
     // integers can be 'annotated':
     let c = 30i32;
-    let d = 30_i32; // the _ is ignored by the compiler, it does improve readability
-    assert_eq!(c, d);
+    let d = 30_i32; // the _ is ignored by the compiler, it can help improve readability
     println!("annotated i32: {:?}\nanother annotated i32: {:?}\n", c, d);
     /*
         sequences:

@@ -1,5 +1,0 @@
-Some text. Some words.
-Some more words.😎
-A haystack. Some other things. And also, a needle.
-Can we find it?"
-And some line that is not in the text inside main.rs.

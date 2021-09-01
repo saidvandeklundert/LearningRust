@@ -1,0 +1,15 @@
+[package]
+name = "option-and-result"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rustc_version_runtime = "0.1.*"
+strum_macros = "0.21"
+structopt = "0.3.21"
+serde_json = "1"
+serde = { version = "1", features = ["derive"] }
+anyhow = "1.0.43"
+eyre = "0.6.5"
